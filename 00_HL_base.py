@@ -9,8 +9,7 @@
 
 
 # Number checking function goes here
-def choice_checker(question, low=None, high=None, respoonse=None):
-
+def choice_checker(question, low=None, high=None, response=None):
     situation = ""
     if low is not None and high is not None:
         situation = "both"
@@ -26,7 +25,7 @@ def choice_checker(question, low=None, high=None, respoonse=None):
             # too low if a both upper and lower bounds
             # are specified
             if situation == "both":
-                if response <low or respoonse > high:
+                if response < low or response > high:
                     print("please enter a number between"
                           "{} and {}".format(low, high))
                     continue
@@ -44,21 +43,3 @@ def choice_checker(question, low=None, high=None, respoonse=None):
         except ValueError:
             print("please enter an integer")
             continue
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

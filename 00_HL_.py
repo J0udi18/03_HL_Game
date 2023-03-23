@@ -42,4 +42,3 @@ def choice_checker(question, low=None, high=None, response=None):
         # checks input is a integer
         except ValueError:
             print("please enter an integer")
-            continue

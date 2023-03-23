@@ -1,6 +1,51 @@
 import random
 
 
+# checks users enter yes / no (y / n) to a question
+def yes_no(question):
+    while True:
+        response = input(question).lower()
+
+        if response == "yes" or response == "y":
+            return "yes"
+
+        elif response == "no" or response == "n":
+            return "no"
+
+        else:
+            print("please answer yes / no")
+
+
+# displays instructions
+def instructions():
+    print("Instructions")
+    print('''
+- Choose a low number
+- Choose a high number
+- etc
+       ''')
+    return ""
+
+
+def statement_generator(statement, decoration):
+    sides = decoration * 3
+
+    statement = "{} {} {}".format(sides, statement, sides)
+    top_bottom = decoration * len(statement)
+
+    print(top_bottom)
+    print(statement)
+    print(top_bottom)
+
+    return ""
+
+
+# Main routine goes here
+statement_generator("welcome to the Low High Game", "*")
+print()
+statement_generator("congratulations", "!")
+
+
 # checks for integers that are optionally more than /
 # between two numbers.  Also allows for exit codes
 def int_checker(question, low=None, high=None, exit_code=None):
@@ -44,10 +89,18 @@ def int_checker(question, low=None, high=None, exit_code=None):
 
 
 rounds_played = 0
+end_game = "no"
+
 game_scores = []
 
 choose_instruction = "please Type a number between 1, 100 "
 mode = "regular"
+
+played_before = yes_no("Have you played the "
+                       "game before? ")
+
+if played_before == "no":
+    instructions()
 
 # Ask user for # of rounds, <enter> for infinite mode
 rounds = int_checker("How many rounds: ", low=0, exit_code="")
@@ -57,7 +110,7 @@ if rounds == "":
     mode = "infinite"
     rounds = 5
 
-while rounds_played <= rounds:
+while rounds_played <= rounds and end_game == "no":
 
     if mode == "infinite":
         heading = f"Continuous Mode: Round {rounds_played + 1}"
@@ -76,6 +129,7 @@ while rounds_played <= rounds:
     while choose != secret:
         choose = int_checker("Guess:", 1, 100, "xxx")
         if choose == "xxx":
+            end_game = "yes"
             break
 
         elif choose < secret:
@@ -111,6 +165,3 @@ play_again = input("Play again? (y/n): ")
 print()
 if play_again.lower() != "y":
     "break"
-
-
-

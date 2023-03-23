@@ -9,7 +9,7 @@
 
 
 # Number checking function goes here
-def choice_checker(question, low=None, high=None, response=None):
+def int_checker(question, low=None, high=None, response=None):
     situation = ""
     if low is not None and high is not None:
         situation = "both"

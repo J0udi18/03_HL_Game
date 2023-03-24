@@ -92,6 +92,7 @@ rounds_played = 0
 end_game = "no"
 
 game_scores = []
+game_history = []
 
 choose_instruction = "please Type a number between 1, 100 "
 mode = "regular"
@@ -110,7 +111,7 @@ if rounds == "":
     mode = "infinite"
     rounds = 5
 
-while rounds_played <= rounds and end_game == "no":
+while rounds_played < rounds and end_game == "no":
 
     if mode == "infinite":
         heading = f"Continuous Mode: Round {rounds_played + 1}"
@@ -138,8 +139,12 @@ while rounds_played <= rounds and end_game == "no":
             print("too high")
         else:
             print("well done")
+            feedback = f"You got it in {num_guesses + 1}"
 
         num_guesses += 1
+
+    outcome = f'Round {rounds_played + 1}: {feedback}'
+    game_history.append(outcome)
 
     rounds_played += 1
     game_scores.append(num_guesses)
@@ -158,6 +163,10 @@ average = sum(game_scores) / len(game_scores)
 
 print(f'Best: {best_score}')
 print(f'Average: {average:.2f}')
+
+print(f'**** Game History ******')
+for item in game_history:
+    print(item)
 
 print("we are done")
 
